@@ -14,19 +14,24 @@ public static class InputManager
 
         _gameControls.Perm.Enable();
 
-        _gameControls.InGame.Movement.performed += move => 
+        _gameControls.InGame.Movement.performed += ctx => 
         {
-            myPlayer.SetMovementDirection(move.ReadValue<Vector3>());
+            myPlayer.Move(ctx.ReadValue<Vector3>());
         };
 
-        _gameControls.InGame.Jump.performed += jump =>
+        _gameControls.InGame.Jump.performed += ctx =>
         {
-            Debug.Log("i jumped");
+            myPlayer.Jump();
         };
 
-        _gameControls.InGame.Crouch.performed += crouch =>
+        _gameControls.InGame.Crouch.performed += ctx =>
         {
             Debug.Log("i crouched");
+        };
+
+        _gameControls.InGame.ResetCharactor.performed += ctx =>
+        {
+            myPlayer.ResetCharactor();
         };
     }
 

@@ -16,9 +16,9 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "e8d2246f-b296-4b65-96d0-95ff4047e1f4",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -28,6 +28,15 @@
                     "type": "PassThrough",
                     "id": "83f2570f-a756-4dd0-b866-62a0f2f8a128",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ResetCharactor",
+                    "type": "Button",
+                    "id": "fea9877c-edc5-44dd-89c8-551c3102dff8",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -119,6 +128,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "01e14c14-59c4-40f4-9a50-06b6e9107a60",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetCharactor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
