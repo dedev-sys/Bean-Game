@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ResetCharactor",
+                    "name": "Reload",
                     "type": "Button",
                     "id": "fea9877c-edc5-44dd-89c8-551c3102dff8",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Punch",
+                    "name": "Throw",
                     "type": "Button",
                     "id": "8fc14e52-b7f6-49b8-882e-d6c7e8d9878b",
                     "expectedControlType": "Button",
@@ -156,7 +156,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ResetCharactor",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -167,7 +167,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Punch",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

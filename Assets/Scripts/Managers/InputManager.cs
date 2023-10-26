@@ -29,9 +29,9 @@ public static class InputManager
             Debug.Log("i crouched");
         };
 
-        _gameControls.InGame.ResetCharactor.performed += ctx =>
+        _gameControls.InGame.Reload.performed += ctx =>
         {
-            myPlayer.ResetCharactor();
+            myPlayer.Reload();
         };
 
         _gameControls.InGame.Look.performed += ctx =>
@@ -39,9 +39,9 @@ public static class InputManager
             myPlayer.SetLookRotation(ctx.ReadValue<Vector2>());
         };
 
-        _gameControls.InGame.Punch.started += ctx =>
+        _gameControls.InGame.Throw.started += ctx =>
         {
-            myPlayer.Punch();
+            myPlayer.Throw();
         };
 
     }

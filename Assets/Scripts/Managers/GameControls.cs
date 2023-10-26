@@ -55,7 +55,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ResetCharactor"",
+                    ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""fea9877c-edc5-44dd-89c8-551c3102dff8"",
                     ""expectedControlType"": ""Button"",
@@ -64,7 +64,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Punch"",
+                    ""name"": ""Throw"",
                     ""type"": ""Button"",
                     ""id"": ""8fc14e52-b7f6-49b8-882e-d6c7e8d9878b"",
                     ""expectedControlType"": ""Button"",
@@ -178,7 +178,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ResetCharactor"",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -189,7 +189,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Punch"",
+                    ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -270,8 +270,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_InGame_Movement = m_InGame.FindAction("Movement", throwIfNotFound: true);
         m_InGame_Jump = m_InGame.FindAction("Jump", throwIfNotFound: true);
         m_InGame_Crouch = m_InGame.FindAction("Crouch", throwIfNotFound: true);
-        m_InGame_ResetCharactor = m_InGame.FindAction("ResetCharactor", throwIfNotFound: true);
-        m_InGame_Punch = m_InGame.FindAction("Punch", throwIfNotFound: true);
+        m_InGame_Reload = m_InGame.FindAction("Reload", throwIfNotFound: true);
+        m_InGame_Throw = m_InGame.FindAction("Throw", throwIfNotFound: true);
         m_InGame_Look = m_InGame.FindAction("Look", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -343,8 +343,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_Movement;
     private readonly InputAction m_InGame_Jump;
     private readonly InputAction m_InGame_Crouch;
-    private readonly InputAction m_InGame_ResetCharactor;
-    private readonly InputAction m_InGame_Punch;
+    private readonly InputAction m_InGame_Reload;
+    private readonly InputAction m_InGame_Throw;
     private readonly InputAction m_InGame_Look;
     public struct InGameActions
     {
@@ -353,8 +353,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_InGame_Movement;
         public InputAction @Jump => m_Wrapper.m_InGame_Jump;
         public InputAction @Crouch => m_Wrapper.m_InGame_Crouch;
-        public InputAction @ResetCharactor => m_Wrapper.m_InGame_ResetCharactor;
-        public InputAction @Punch => m_Wrapper.m_InGame_Punch;
+        public InputAction @Reload => m_Wrapper.m_InGame_Reload;
+        public InputAction @Throw => m_Wrapper.m_InGame_Throw;
         public InputAction @Look => m_Wrapper.m_InGame_Look;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
@@ -374,12 +374,12 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
-            @ResetCharactor.started += instance.OnResetCharactor;
-            @ResetCharactor.performed += instance.OnResetCharactor;
-            @ResetCharactor.canceled += instance.OnResetCharactor;
-            @Punch.started += instance.OnPunch;
-            @Punch.performed += instance.OnPunch;
-            @Punch.canceled += instance.OnPunch;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
+            @Throw.started += instance.OnThrow;
+            @Throw.performed += instance.OnThrow;
+            @Throw.canceled += instance.OnThrow;
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
@@ -396,12 +396,12 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
-            @ResetCharactor.started -= instance.OnResetCharactor;
-            @ResetCharactor.performed -= instance.OnResetCharactor;
-            @ResetCharactor.canceled -= instance.OnResetCharactor;
-            @Punch.started -= instance.OnPunch;
-            @Punch.performed -= instance.OnPunch;
-            @Punch.canceled -= instance.OnPunch;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
+            @Throw.started -= instance.OnThrow;
+            @Throw.performed -= instance.OnThrow;
+            @Throw.canceled -= instance.OnThrow;
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
@@ -519,8 +519,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
-        void OnResetCharactor(InputAction.CallbackContext context);
-        void OnPunch(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
     }
     public interface IUIActions

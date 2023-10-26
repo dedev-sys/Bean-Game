@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
 
+    [Header("Camera")]
     [SerializeField, Range(1,20)] private float mouseSensX;
     [SerializeField, Range(1,20)] private float mouseSensY;
     [SerializeField] private Transform followTarget;
@@ -24,12 +26,19 @@ public class Player : MonoBehaviour
     private Rigidbody rig;
     private float jumpSpeed = 5f;
 
+    [Header("Snowballs")]
+    [SerializeField] private Rigidbody snowball;
+    [SerializeField] private float force;
+    public int ammo;
+    public Image ammoUI;
+
     // Start is called before the first frame update
     void Start()
     {
         InputManager.Init(this);
         rig = GetComponent<Rigidbody>();
         InputManager.SetGameControls();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -62,6 +71,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Currently NOT in use
     public void ResetCharactor()
     {
         transform.position = new Vector3(0,3,0);
@@ -72,11 +82,6 @@ public class Player : MonoBehaviour
     public void Move(Vector3 currentDirection)
     {
         _moveDirection = currentDirection;
-        //if (currentDirection == new Vector3(0,0,0)) _moveDirection = currentDirection;
-        //else if (currentDirection.x > 0) _moveDirection = transform.right;
-        //else if (currentDirection.x < 0) _moveDirection = -transform.right;
-        //else if (currentDirection.z > 0) _moveDirection = transform.forward;
-        //else if (currentDirection.z < 0) _moveDirection = -transform.forward;
     }
 
     public void SetLookRotation(Vector2 readValue)
@@ -91,8 +96,27 @@ public class Player : MonoBehaviour
         followTarget.localRotation = Quaternion.AngleAxis(currentAngle.y, Vector3.right);
     }
 
-    public void Punch()
+    public void Throw()
     {
+        if (ammo > 0)
+        {
+            Rigidbody currentSnowball = Instantiate(snowball, transform.position + transform.forward + new Vector3(0,0.5f,0), Quaternion.identity);
+            currentSnowball.AddForce(followTarget.forward * force, ForceMode.Impulse);
+            Destroy(currentSnowball.gameObject, 4);
 
+            ammo -= 1;
+            setUI();
+        }
+    }
+
+    public void Reload()
+    {
+        ammo = 10;
+        setUI();
+    }
+
+    public void setUI()
+    {
+        ammoUI.fillAmount = 0.3f + (0.04f * ammo); 
     }
 }
