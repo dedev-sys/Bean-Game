@@ -6,8 +6,18 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    [SerializeField, Range(1,20)] private float mouseSensX;
+    [SerializeField, Range(1,20)] private float mouseSensY;
+    [SerializeField] private Transform followTarget;
+    private Vector2 currentAngle;
+
+    [SerializeField, Range(-90,0)] private float minViewAngle;
+    [SerializeField, Range(0, 90)] private float maxViewAngle;
+
     [SerializeField] private float speed;
     private Vector3 _moveDirection;
+
+    public static int score;
 
     bool isGround;
 
@@ -26,8 +36,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         isGround = Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y);
-        transform.position += speed * Time.deltaTime * _moveDirection;
+        transform.position += transform.rotation * (speed * Time.deltaTime * _moveDirection);
         fallCheck();
+    }
+
+    public static void ScoreInc()
+    {
+        score += 1;
+        Debug.Log("Score:"+score);
     }
 
     public void fallCheck()
@@ -55,10 +71,28 @@ public class Player : MonoBehaviour
 
     public void Move(Vector3 currentDirection)
     {
-        if (currentDirection == new Vector3(0,0,0)) _moveDirection = currentDirection;
-        else if (currentDirection.x > 0) _moveDirection = transform.right;
-        else if (currentDirection.x < 0) _moveDirection = -transform.right;
-        else if (currentDirection.z > 0) _moveDirection = transform.forward;
-        else if (currentDirection.z < 0) _moveDirection = -transform.forward;
+        _moveDirection = currentDirection;
+        //if (currentDirection == new Vector3(0,0,0)) _moveDirection = currentDirection;
+        //else if (currentDirection.x > 0) _moveDirection = transform.right;
+        //else if (currentDirection.x < 0) _moveDirection = -transform.right;
+        //else if (currentDirection.z > 0) _moveDirection = transform.forward;
+        //else if (currentDirection.z < 0) _moveDirection = -transform.forward;
+    }
+
+    public void SetLookRotation(Vector2 readValue)
+    {
+        currentAngle.x += readValue.x * Time.deltaTime * mouseSensX;
+        currentAngle.y += readValue.y * Time.deltaTime * mouseSensY;
+
+        currentAngle.y = Mathf.Clamp(currentAngle.y, minViewAngle, maxViewAngle);
+
+
+        transform.rotation = Quaternion.AngleAxis(currentAngle.x, Vector3.up);
+        followTarget.localRotation = Quaternion.AngleAxis(currentAngle.y, Vector3.right);
+    }
+
+    public void Punch()
+    {
+
     }
 }

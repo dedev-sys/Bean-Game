@@ -11,6 +11,7 @@ public class Collectables : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         Destroy(gameObject);
+        Player.ScoreInc();
     }
 
     public void RespawnToast()

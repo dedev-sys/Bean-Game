@@ -33,6 +33,17 @@ public static class InputManager
         {
             myPlayer.ResetCharactor();
         };
+
+        _gameControls.InGame.Look.performed += ctx =>
+        {
+            myPlayer.SetLookRotation(ctx.ReadValue<Vector2>());
+        };
+
+        _gameControls.InGame.Punch.started += ctx =>
+        {
+            myPlayer.Punch();
+        };
+
     }
 
     public static void SetGameControls()
